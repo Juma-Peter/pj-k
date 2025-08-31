@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>{{ datatype|capitalize }} Report</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+    }
+    th, td {
+      border: 1px solid #999;
+      padding: 10px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <h2>{{ datatype|capitalize }} Report</h2>
+  <table>
+    <thead>
+      {% if datatype == 'fees' %}
+        <tr><th>Term</th><th>Year</th><th>Total Amount</th></tr>
+      {% else %}
+        <tr><th>Subject ID</th><th>Exam ID</th><th>Marks Obtained</th></tr>
+      {% endif %}
+    </thead>
+    <tbody>
+      {% for row in records %}
+        {% if datatype == 'fees' %}
+          <tr><td>{{ row.term }}</td><td>{{ row.year }}</td><td>{{ row.total_amount }}</td></tr>
+        {% else %}
+          <tr><td>{{ row.subject_id }}</td><td>{{ row.exam_id }}</td><td>{{ row.marks_obtained }}</td></tr>
+        {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>

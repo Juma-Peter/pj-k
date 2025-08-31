@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #eef;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .navbar {
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 80px;
+      background: linear-gradient(to right, #003366, #0056b3);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .navbar h1 {
+      font-size: 32px;
+      animation: slideIn 1s ease-in-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .container {
+      display: flex;
+      margin-top: 80px;
+      min-height: calc(100vh - 80px);
+    }
+
+    .sidebar {
+      width: 220px;
+      background-color: #f7f9fc;
+      padding: 20px 10px;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      height: 100%;
+      overflow-y: auto;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 12px;
+      margin: 10px 0;
+      background-color: #007BFF;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 8px;
+      text-align: center;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .sidebar a:hover {
+      background-color: #0056b3;
+      transform: scale(1.05);
+    }
+
+    .main {
+      margin-left: 240px;
+      padding: 30px;
+      width: calc(100% - 240px);
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h2 {
+      color: #003366;
+      margin-top: 50px;
+      font-size: 26px;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 5px;
+    }
+
+    form {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 15px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      transition: box-shadow 0.3s ease;
+    }
+
+    form:hover {
+      box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      font-size: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      transition: border-color 0.3s;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: #007BFF;
+    }
+
+    button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+      transform: scale(1.03);
+    }
+
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      background-color: #003366;
+      color: white;
+    }
+
+    .action-btn {
+      background-color: #28a745;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 5px;
+      text-decoration: none;
+      margin-right: 8px;
+      transition: all 0.2s;
+    }
+
+    .action-btn:hover {
+      background-color: #1e7e34;
+      transform: scale(1.05);
+    }
+
+    .action-btn:nth-child(2) {
+      background-color: #dc3545;
+    }
+
+    .action-btn:nth-child(2):hover {
+      background-color: #c82333;
+    }
+
+    hr {
+      margin: 50px 0;
+      border: 1px dashed #ccc;
+    }
+
+    @media screen and (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        box-shadow: none;
+      }
+
+      .main {
+        margin-left: 0;
+        width: 100%;
+        padding: 20px;
+      }
+
+      .sidebar a {
+        margin: 5px;
+        flex: 1 1 40%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <h1><marquee>Admin Dashboard</marquee></h1>
+  </div>
+
+  <div class="container">
+    <div class="sidebar">
+      <a href="#add-student">Add Student</a>
+      <a href="#add-subject">Add Subject</a>
+      <a href="#add-exam">Add Exam</a>
+      <a href="#add-result">Add Result</a>
+      <a href="#add-fees">Add Fees</a>
+      <a href="#all-students">All Students</a>
+      <a href="#all-subjects">All Subjects</a>
+      <a href="#all-exams">All Exams</a>
+    </div>
+
+    <div class="main">
+      <h2 id="add-student">Add Student</h2>
+      <form action="/add_student" method="POST">
+        <input name="first_name" placeholder="First Name" required>
+        <input name="last_name" placeholder="Last Name" required>
+        <input name="admission_no" placeholder="Admission No" required>
+        <select name="gender" required>
+          <option disabled selected>Select Gender</option>
+          <option>Male</option><option>Female</option><option>Other</option>
+        </select>
+        <input name="class" placeholder="Class (e.g., Grade 4)" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Add Student</button>
+      </form>
+
+      <h2 id="add-subject">Add Subject</h2>
+      <form action="/add_subject" method="POST">
+        <select name="subject_name" required>
+          <option disabled selected>Select Subject</option>
+          <option value="Mathematics">Mathematics</option>
+          <option value="English">English</option>
+          <option value="Kiswahili">Kiswahili</option>
+          <option value="Science">Science</option>
+          <option value="C.R.E">C.R.E</option>
+        </select>
+        <button type="submit">Add Subject</button>
+      </form>
+
+      <h2 id="add-exam">Add Exam</h2>
+      <form action="/add_exam" method="POST">
+        <input name="name" placeholder="Exam Name" required>
+        <input name="term" placeholder="Term (e.g., Term 1)" required>
+        <input name="year" type="number" placeholder="Year" required>
+        <button type="submit">Add Exam</button>
+      </form>
+
+      <h2 id="add-result">Add Result</h2>
+      <form action="/add_result" method="POST">
+        <select name="student_id" required>
+          <option disabled selected>Select Student</option>
+          {% for s in students %}
+            <option value="{{ s.id }}">{{ s.FirstName }} {{ s.LastName }} - {{ s.admission_no }}</option>
+          {% endfor %}
+        </select>
+        <select name="subject_id" required>
+          <option disabled selected>Select Subject</option>
+          {% for sub in subjects %}
+            <option value="{{ sub.id }}">{{ sub.subject_name }}</option>
+          {% endfor %}
+        </select>
+        <select name="exam_id" required>
+          <option disabled selected>Select Exam</option>
+          {% for e in exams %}
+            <option value="{{ e.id }}">{{ e.name }} - {{ e.term }} {{ e.year }}</option>
+          {% endfor %}
+        </select>
+        <input type="number" name="marks_obtained" placeholder="Marks Obtained" required>
+        <button type="submit">Add Result</button>
+      </form>
+
+      <h2 id="add-fees">Add Fees</h2>
+      <form action="/add_fees" method="POST">
+        <select name="student_id" required>
+          <option disabled selected>Select Student</option>
+          {% for s in students %}
+            <option value="{{ s.id }}">{{ s.FirstName }} {{ s.LastName }} - {{ s.admission_no }}</option>
+          {% endfor %}
+        </select>
+        <input name="term" placeholder="Term" required>
+        <input type="number" name="year" placeholder="Year" required>
+        <input type="number" name="total_amount" placeholder="Total Amount" step="0.01" required>
+        <button type="submit">Add Fees</button>
+      </form>
+
+      <hr>
+
+      <h2 id="all-students">All Students</h2>
+      <table>
+        <tr><th>Name</th><th>Adm No</th><th>Gender</th><th>Actions</th></tr>
+        {% for s in students %}
+        <tr>
+          <td>{{ s.FirstName }} {{ s.LastName }}</td>
+          <td>{{ s.admission_no }}</td>
+          <td>{{ s.gender }}</td>
+          <td>
+            <a class="action-btn" href="/edit_student/{{ s.id }}">Edit</a>
+            <a class="action-btn" href="/delete_student/{{ s.id }}" onclick="return confirm('Delete student?');">Delete</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+
+      <h2 id="all-subjects">All Subjects</h2>
+      <table>
+        <tr><th>Subject Name</th><th>Actions</th></tr>
+        {% for sub in subjects %}
+        <tr>
+          <td>{{ sub.subject_name }}</td>
+          <td>
+            <a class="action-btn" href="/edit_subject/{{ sub.id }}">Edit</a>
+            <a class="action-btn" href="/delete_subject/{{ sub.id }}" onclick="return confirm('Delete subject?');">Delete</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+
+      <h2 id="all-exams">All Exams</h2>
+      <table>
+        <tr><th>Name</th><th>Term</th><th>Year</th><th>Actions</th></tr>
+        {% for e in exams %}
+        <tr>
+          <td>{{ e.name }}</td><td>{{ e.term }}</td><td>{{ e.year }}</td>
+          <td>
+            <a class="action-btn" href="/edit_exam/{{ e.id }}">Edit</a>
+            <a class="action-btn" href="/delete_exam/{{ e.id }}" onclick="return confirm('Delete exam?');">Delete</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+</body>
+</html>

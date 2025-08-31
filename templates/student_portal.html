@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Portal</title>
+  <style>
+    body {
+      background-color: #e0f7ff;
+      font-family: sans-serif;
+      padding: 20px;
+    }
+    h2 {
+      color: #003366;
+    }
+    table {
+      width: 100%;
+      margin-top: 10px;
+      border-collapse: collapse;
+      background-color: #fff;
+      margin-bottom: 30px;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+    .btn {
+      background-color: #007BFF;
+      color: white;
+      padding: 10px 15px;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+    .btn:hover {
+      background-color: #0056b3;
+    }
+    .average-row {
+      font-weight: bold;
+      background-color: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+  <h2>Fees Statement</h2>
+  <a class="btn" href="/download/fees/{{ request.args.get('id') }}">Download PDF</a>
+  <table>
+    <tr><th>Term</th><th>Year</th><th>Total Amount</th></tr>
+    {% for fee in fees %}
+    <tr>
+      <td>{{ fee.term }}</td>
+      <td>{{ fee.year }}</td>
+      <td>{{ fee.total_amount }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <h2>Exam Results</h2>
+  <a class="btn" href="/download/results/{{ request.args.get('id') }}">Download PDF</a>
+  <table>
+    <tr><th>Subject ID</th><th>Subject Name</th><th>Exam ID</th><th>Marks Obtained</th></tr>
+    {% set total = 0 %}
+    {% set count = 0 %}
+    {% for r in results %}
+    <tr>
+      <td>{{ r.subject_id }}</td>
+      <td>{{ r.subject_name }}</td>
+      <td>{{ r.exam_id }}</td>
+      <td>{{ r.marks_obtained }}</td>
+    </tr>
+    {% set total = total + r.marks_obtained %}
+    {% set count = count + 1 %}
+    {% endfor %}
+    {% if count > 0 %}
+   <tr class="average-row">
+  <td colspan="3">Average Marks</td>
+  <td>{{ average }}</td>
+</tr>
+
+    {% endif %}
+  </table>
+</body>
+</html>

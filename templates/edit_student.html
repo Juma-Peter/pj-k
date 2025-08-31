@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Student</title>
+  <style>
+    body {
+      font-family: Arial;
+      background-color: #eef;
+      padding: 30px;
+    }
+    form {
+      background: #fff;
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    input, select, button {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h2>Edit Student</h2>
+  <form method="POST">
+    <input name="first_name" value="{{ student.FirstName }}" placeholder="First Name" required>
+    <input name="last_name" value="{{ student.LastName }}" placeholder="Last Name" required>
+    <input name="admission_no" value="{{ student.admission_no }}" placeholder="Admission No" required>
+    <select name="gender" required>
+      <option value="Male" {% if student.gender == 'Male' %}selected{% endif %}>Male</option>
+      <option value="Female" {% if student.gender == 'Female' %}selected{% endif %}>Female</option>
+      <option value="Other" {% if student.gender == 'Other' %}selected{% endif %}>Other</option>
+    </select>
+    <input name="class" value="{{ student.class }}" placeholder="Class (e.g., Grade 4)" required>
+    <button type="submit">Update Student</button>
+  </form>
+</body>
+</html>
