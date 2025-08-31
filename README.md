@@ -22,20 +22,20 @@ It captures student details including **fees** and **academic results**, and gen
    git clone https://github.com/your-username/student-management-system.git
    cd student-management-system
 
-# Create and activate a virtual environment (optional but recommended)
+## Create and activate a virtual environment (optional but recommended)
 
 python -m venv venv
 source venv/bin/activate   # On Linux/Mac
 venv\Scripts\activate      # On Windows
 
-# Install dependencies
+## Install dependencies
 
 pip install -r requirements.txt
 
-# Run the application
+## Run the application
 python app.py
 
-# Basic Dependencies (requirements.txt)
+## Basic Dependencies (requirements.txt)
 Flask==2.3.3
 Flask-SQLAlchemy==3.0.5
 Flask-WTF==1.2.1
